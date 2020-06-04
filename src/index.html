@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>LandRegistry System Blockchain</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container" style="width: 650px;">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="text-center">Land Registration System - Blockchain</h1>
+          <hr/>
+          <br/>
+          <div id="loader">
+            <p class="text-center" id="loaderText">Loading...</p>
+          </div>
+
+          <div id="RegisterLand" style="display: none;">
+            <button class="btn btn-primary" id="RegisterLandBtn" onClick="App.RegisterLand();">Register New Land</button>
+          </div>
+
+          <div>
+            <form id="Search_SurveyNo" onSubmit="App.SearchSurveyNo(); return false;" style="display: none;">
+              <div class="form-group">
+                <br>
+                <label for="Search_SurveyNo">Enter your Survey number here</label>
+                <input type="text" class="form-control" id="SurveyNumber">
+              </div>
+              <button type="submit" class="btn btn-primary">Search</button>
+              <hr />
+            </form>
+          </div>
+          
+          <div id="LandRegistrationDiv" style="display: none;"> 
+            <form onsubmit="App.RegisterNewLand(); return false">
+              <h3>Land Registration</h3>
+              <table class="table" id="LandRegistrationTable">
+                <tr>
+                  <p>Name</p><input type="text" class="form-control" id="RegName">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Father/Husband Name</p><input type="text" class="form-control" id="RegGName">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Aadhar Number</p><input type="number" class="form-control" id="RegAadhar">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Survey Number</p><input type="text" class="form-control" id="RegSurveyNo">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Total Area</p><input type="number" min="1" class="form-control" id="RegTotalArea">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Cost</p><input type="number" min="1" class="form-control" id="RegCost">
+                  <br>
+                </tr>
+                <tr>
+                  <p>PAN</p><input type="text" min="1" class="form-control" id="RegPAN">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Registration Date</p><input type="date" class="form-control" id="RegDate">
+                  <br>
+                </tr>
+                <tr>
+                  <p>City</p><input type="text" class="form-control" id="RegCity">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Revenue Division</p><input type="text" class="form-control" id="RegRevDiv">
+                  <br>
+                </tr>
+                <tr>
+                  <p>Mandal</p><input type="text" class="form-control" id="RegMandal">
+                  <br>
+                </tr>
+                <tr>
+                  <p>District</p><input type="text" class="form-control" id="RegDistrict">
+                  <br>
+                </tr>
+                <tr>
+                  <p>State</p><input type="text" class="form-control" id="RegState">
+                  <br>
+                </tr>
+                <tr>
+                  <input type="submit" class="btn btn-primary">
+                </tr>
+              </table>  
+            </form>
+          </div>
+
+          <div id="content" style="display: none;">
+            <div id='LandDetails' style="display: none;">
+            <table class="table" id="LandDetailsTable">
+              <thead>
+                <tr>
+                  <th scope="col">Survey Number</th>
+                  <th scope="col">Total Area</th>
+                  <th scope="col">City</th>
+                  <th scope="col">Revenue Division</th>
+                  <th scope="col">Mandal</th>
+                  <th scope="col">District</th>
+                  <th scope="col">state</th>
+                </tr>
+              </thead>
+              <tbody id="LandResults">
+              </tbody>
+            </table>
+          
+
+          <div id="OwnerDetailsDiv" style="display: none;">
+            <button class="btn btn-primary" id="OwnerDetailsBtn" onClick="App.getOwnerDetails();">Get More Details</button>
+          </div>
+        </div>
+            <hr/>
+
+            <div id='OwnerDetails' style="display: none;">
+              <table class="table" id="OwnerDetailsTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Father/ Husband</th>
+                    <th scope="col">Aadhar number</th>
+                    <th scope="col">PAN</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Registration date</th>
+                  </tr>
+                </thead>
+                <tbody id="OwnerResults">
+                </tbody>
+              </table>
+              
+              <div id="MoreDetailsDiv" style="display: none;">
+                <button class="btn btn-primary" id="MoreDetailsBtn" onClick="App.getPrevoiusOwners();">Get Previous Owners</button>
+              </div>
+            </div>
+            
+            <br>
+            
+          <div id="LandControl" style="display: none;">
+            <div id='LandControlBtn'>
+              <button class="btn btn-primary" id="SellLand" onClick="App.LandControl();">Sell Land</button>
+            </div>
+        
+            <div id='LandControlForm' style="display: none;">
+            <form onSubmit="App.SellLand(); return false;" id="LandSellDetails">
+              <h3>Sell Land</h3>
+              <div class="form-group">
+                  <table class="table" id="LandRegistrationTable">
+                      <tr>
+                          <p>Please change to account in metamask to land buyer's account (for security purppose)</p> 
+                          <a onclick="App.getAddress(); return false">Get buyer's Account Address</a><input type="text" class="form-control" id="SellAddress">
+                          <br>
+                        </tr>
+                      <tr>
+                        <p>Name</p><input type="text" class="form-control" id="SellName">
+                        <br>
+                      </tr>
+                      <tr>
+                        <p>Father/Husband Name</p><input type="text" class="form-control" id="SellGName">
+                        <br>
+                      </tr>
+                      <tr>
+                        <p>Aadhar Number</p><input type="number" class="form-control" id="SellAadhar">
+                        <br>
+                      </tr>
+                      <tr>
+                        <p>Cost</p><input type="number" min="1" class="form-control" id="SellCost">
+                        <br>
+                      </tr>
+                      <tr>
+                        <p>PAN</p><input type="text" min="1" class="form-control" id="SellPAN">
+                        <br>
+                      </tr>
+                      <tr>
+                        <p>Registration Date</p><input type="date" class="form-control" id="SellDate">
+                        <br>
+                      </tr>
+                      <tr>
+                        <p>Please change the account in metamask back to owner's account</p>
+                        <input type="submit" class="btn btn-primary">
+                      </tr>
+                    </table>  
+              </div>
+              <hr />
+            </form>
+          </div>
+            
+          </div>
+        </div>
+        <p id="accountAddress" class="text-center"></p>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

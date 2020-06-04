@@ -1,0 +1,30 @@
+{
+
+"config": {
+
+"chainId": 143,
+
+"homesteadBlock": 0,
+
+"eip155Block": 0,
+
+"eip158Block": 0
+
+},
+
+"alloc": {},
+
+"difficulty" : "0x20000",
+
+"gasLimit"   : "0x8880000"
+
+"coinbase" : "0x75bcb134477f42f6fefbf177f9a610c0665e23a6",
+"difficulty" : "0x20000",
+"extraData" : "",
+"gasLimit" : "0x2fefd8ffffffffff",
+"nonce" : "0x0000000000000042",
+"mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
+"parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
+"timestamp" : "0x00"
+
+}
